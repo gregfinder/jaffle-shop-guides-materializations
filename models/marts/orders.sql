@@ -22,7 +22,7 @@ orders_set as (
     
     {% if is_incremental() %}
         
-        and ordered_at >= (select max(ordered_at) from {{ this }})
+        and ordered_at >= (select date_addmax(ordered_at) - interval 3 day from {{ this }})
     
     {% endif %}
 
